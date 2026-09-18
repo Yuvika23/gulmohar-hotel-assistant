@@ -254,6 +254,24 @@ describe("The Gulmohar — LLM-Powered Concierge Engine Tests", () => {
     });
   });
 
+  describe("Scenario 11: Gemini API failure / 429 fallback", () => {
+    it("handles Gemini 429 / network errors gracefully with llm_error fallback", async () => {
+      const { callGemini } = await import("../src/lib/geminiClient");
+      vi.mocked(callGemini).mockRejectedValueOnce(
+        new Error("Gemini API error (429): Resource has been exhausted (e.g. check quota).")
+      );
+
+      const response = await processConciergeMessage({
+        message: "What time does the spa open?",
+      });
+
+      expect(response.intent).toBe("llm_error");
+      expect(response.reply).toContain("temporarily unable to respond");
+      expect(response.reply).toContain("check room availability");
+      expect(response.suggestedActions).toContain("Check Availability");
+    });
+  });
+
   // ── Explicit Section 4 Verification Tests ─────────────────────────────────
 
   describe("Section 4: Chat Availability Flow Verification", () => {
