@@ -203,11 +203,11 @@ export async function processConciergeMessage(request: ChatRequest): Promise<Cha
       const guestLabel = guests === 1 ? "guest" : "guests";
       const roomCount = availability.rooms.length;
 
-      const reply = `I've checked our room ledger for ${availability.nights} ${nightLabel} (${dates.checkIn} to ${dates.checkOut}) for ${guests} ${guestLabel}. We have ${roomCount} suite${roomCount !== 1 ? "s" : ""} available that match your party size. You can review each suite's details and rates below.`;
+      const reply = `I've checked our room ledger for ${availability.nights} ${nightLabel} (${dates.checkIn} to ${dates.checkOut}) for ${guests} ${guestLabel}. We have ${roomCount} room option${roomCount !== 1 ? "s" : ""} available that match your party size. You can review room details and rates below.`;
 
       return {
         reply,
-        suggestedActions: ["View Suite Details", "Check Cancellation Policy", "Is Breakfast Included?"],
+        suggestedActions: ["Check Cancellation Policy", "Is Breakfast Included?", "View Amenities"],
         intent: "availability_results",
         availabilityData: {
           checkIn: dates.checkIn,
@@ -225,7 +225,7 @@ export async function processConciergeMessage(request: ChatRequest): Promise<Cha
         suggestedActions: [
           "Check Oct 10 – 14 (2 guests)",
           "Check Dec 20 – 23 (3 guests)",
-          "Explore All Suites",
+          "Explore All Rooms",
         ],
         intent: "availability_missing_dates",
       };
@@ -249,7 +249,7 @@ export async function processConciergeMessage(request: ChatRequest): Promise<Cha
 
     const friendlyError = isKeyMissing
       ? "The concierge assistant is not configured yet. Please ensure the GEMINI_API_KEY is set in .env.local."
-      : "I'm having a little trouble reaching the guest services archives right now. Please try again in a moment, or I can help with room availability directly.";
+      : "I'm temporarily unable to respond to that right now. Please try again in a moment. I can still help you check room availability.";
 
     return {
       reply: friendlyError,

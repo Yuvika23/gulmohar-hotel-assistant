@@ -253,4 +253,74 @@ describe("The Gulmohar — LLM-Powered Concierge Engine Tests", () => {
       expect(response.reply.toLowerCase()).toMatch(/don't have|not have|check with|front desk|reservations/);
     });
   });
+
+  // ── Explicit Section 4 Verification Tests ─────────────────────────────────
+
+  describe("Section 4: Chat Availability Flow Verification", () => {
+    it("TEST 1: 'I need a room for 3 adults from September 20 to September 23.' reaches checkAvailability deterministically", async () => {
+      const { callGemini } = await import("../src/lib/geminiClient");
+      const res = await processConciergeMessage({
+        message: "I need a room for 3 adults from September 20 to September 23.",
+      });
+
+      expect(callGemini).not.toHaveBeenCalled();
+      expect(res.intent).toBe("availability_results");
+      expect(res.availabilityData).toBeDefined();
+      expect(res.availabilityData?.guests).toBe(3);
+      expect(res.availabilityData?.nights).toBe(3);
+      expect(res.availabilityData?.checkIn).toContain("-09-20");
+      expect(res.availabilityData?.checkOut).toContain("-09-23");
+      expect(res.availabilityData?.rooms.length).toBeGreaterThan(0);
+      res.availabilityData?.rooms.forEach((room) => {
+        expect(room.capacity).toBeGreaterThanOrEqual(3);
+      });
+    });
+
+    it("TEST 2: 'What about 2 adults?' preserves prior dates and recalculates availability", async () => {
+      const { callGemini } = await import("../src/lib/geminiClient");
+      const history: { role: "user" | "assistant"; content: string }[] = [
+        { role: "user", content: "I need a room for 3 adults from September 20 to September 23." },
+        { role: "assistant", content: "I've checked our room ledger for 3 nights from September 20 to September 23 for 3 guests." },
+      ];
+
+      const res = await processConciergeMessage({
+        message: "What about 2 adults?",
+        history,
+      });
+
+      expect(callGemini).not.toHaveBeenCalled();
+      expect(res.intent).toBe("availability_results");
+      expect(res.availabilityData).toBeDefined();
+      expect(res.availabilityData?.guests).toBe(2);
+      expect(res.availabilityData?.nights).toBe(3);
+      expect(res.availabilityData?.checkIn).toContain("-09-20");
+      expect(res.availabilityData?.checkOut).toContain("-09-23");
+      // For 2 adults, Deluxe King and Premium King become available in addition to Family Room & Suite
+      expect(res.availabilityData?.rooms.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it("TEST 3: 'Do you have a room available?' requests missing dates without inventing them", async () => {
+      const { callGemini } = await import("../src/lib/geminiClient");
+      const res = await processConciergeMessage({
+        message: "Do you have a room available?",
+      });
+
+      expect(callGemini).not.toHaveBeenCalled();
+      expect(res.intent).toBe("availability_missing_dates");
+      expect(res.availabilityData).toBeUndefined();
+      expect(res.reply).toContain("check-in and check-out dates");
+    });
+
+    it("TEST 4: 'I need a room from September 20 to September 18.' cleanly rejects inverted dates", async () => {
+      const { callGemini } = await import("../src/lib/geminiClient");
+      const res = await processConciergeMessage({
+        message: "I need a room from September 20 to September 18.",
+      });
+
+      expect(callGemini).not.toHaveBeenCalled();
+      expect(res.intent).toBe("availability_invalid_dates");
+      expect(res.availabilityData).toBeUndefined();
+      expect(res.reply).toContain("issue with the dates");
+    });
+  });
 });

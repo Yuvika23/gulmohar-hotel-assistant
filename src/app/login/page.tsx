@@ -169,13 +169,13 @@ export default function LoginPage() {
             <div className="relative p-6 sm:p-8 z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 text-[#C2410C] text-xs font-semibold shadow-xs">
                 <GulmoharLogo size={20} />
-                <span>Gulmohar Resident Club</span>
+                <span>Gulmohar Resident Club — Coming Soon</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-3">
                 A seamless boutique stay in central Bengaluru.
               </h2>
               <p className="text-xs text-white/80 mt-1 leading-relaxed max-w-md">
-                Sign in to view active reservation folios, request early check-in, and unlock exclusive resident privileges.
+                Preview member privileges, priority early check-in, and exclusive resident dining benefits.
               </p>
             </div>
 
@@ -207,25 +207,33 @@ export default function LoginPage() {
                   <MapPin className="w-3.5 h-3.5 text-[#FED7AA]" /> 14 Lavelle Road, Bengaluru
                 </span>
                 <span className="flex items-center gap-1">
-                  <Shield className="w-3.5 h-3.5 text-emerald-400" /> Secure Guest Portal
+                  <Shield className="w-3.5 h-3.5 text-emerald-400" /> Demo Mode Preview
                 </span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Guest Sign In Form Card */}
-          <div className="lg:col-span-6 bg-white border border-[#E3DDD3] rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 flex flex-col justify-center">
+          <div className="lg:col-span-6 bg-white border border-[#E3DDD3] rounded-2xl p-6 sm:p-8 shadow-sm space-y-5 flex flex-col justify-center">
+            {/* Reviewer / Demo Notice */}
+            <div className="p-3 bg-amber-50/90 border border-amber-200 rounded-xl text-[11px] text-amber-900 flex items-start gap-2">
+              <Sparkles className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+              <span>
+                <strong>Resident Club — Coming Soon (Demo Mode):</strong> This guest portal demonstrates local session state and UI flows. Full backend authentication is planned for a future release. Use demo OTP <strong>1234</strong> to preview.
+              </span>
+            </div>
+
             <div>
               <span className="text-[11px] uppercase tracking-wider text-[#C2410C] font-semibold block">
-                {mode === "login" ? "Guest Sign In" : "Registration"}
+                {mode === "login" ? "Guest Sign In (Preview)" : "Registration (Preview)"}
               </span>
               <h1 className="text-2xl font-bold text-[#1C1917] tracking-tight">
-                {mode === "login" ? "Welcome back to The Gulmohar." : "Create Your Resident Account"}
+                {mode === "login" ? "Welcome to The Gulmohar." : "Join the Resident Club"}
               </h1>
               <p className="text-xs text-[#78716C] mt-1">
                 {mode === "login"
-                  ? "Access your stay details, dining privileges, and live assistant."
-                  : "Join the Gulmohar Resident Club for priority booking benefits."}
+                  ? "Access your stay details, dining privileges, and live assistant in demo mode."
+                  : "Preview the Gulmohar Resident Club member experience."}
               </p>
             </div>
 
