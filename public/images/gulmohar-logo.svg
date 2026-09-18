@@ -1,0 +1,47 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C" />
+      <stop offset="100%" stop-color="#C2410C" />
+    </linearGradient>
+    <linearGradient id="topPetalGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#C2410C" />
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFBEB" />
+      <stop offset="60%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#9A3412" />
+    </radialGradient>
+  </defs>
+
+  <rect width="100" height="100" rx="22" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  
+  <circle cx="50" cy="50" r="42" stroke="#FDBA74" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.8" />
+  <circle cx="50" cy="50" r="38" stroke="#FED7AA" stroke-width="0.8" />
+
+  <!-- 5-Petal Gulmohar Blossom -->
+  <path d="M50 18 C56 26, 62 33, 55 45 C52 48, 48 48, 45 45 C38 33, 44 26, 50 18 Z" fill="url(#topPetalGrad)" />
+  <path d="M50 20 L50 36" stroke="#FFFBEB" stroke-width="0.8" stroke-linecap="round" opacity="0.8" />
+
+  <path d="M78 36 C77 46, 68 50, 56 48 C52 46, 50 43, 52 39 C58 29, 68 28, 78 36 Z" fill="url(#petalGrad)" />
+  <path d="M70 74 C60 77, 54 70, 52 58 C51 54, 53 51, 57 51 C69 51, 74 62, 70 74 Z" fill="url(#petalGrad)" />
+  <path d="M30 74 C34 62, 39 51, 51 51 C55 51, 57 54, 56 58 C54 70, 48 77, 30 74 Z" fill="url(#petalGrad)" />
+  <path d="M22 36 C32 28, 42 29, 48 39 C50 43, 48 46, 44 48 C32 50, 23 46, 22 36 Z" fill="url(#petalGrad)" />
+
+  <!-- Radiating Stamens -->
+  <line x1="50" y1="50" x2="50" y2="34" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" />
+  <circle cx="50" cy="33" r="1.8" fill="#D97706" />
+  <line x1="50" y1="50" x2="63" y2="42" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" />
+  <circle cx="64" cy="41" r="1.8" fill="#D97706" />
+  <line x1="50" y1="50" x2="59" y2="61" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" />
+  <circle cx="60" cy="62" r="1.8" fill="#D97706" />
+  <line x1="50" y1="50" x2="41" y2="61" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" />
+  <circle cx="40" cy="62" r="1.8" fill="#D97706" />
+  <line x1="50" y1="50" x2="37" y2="42" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" />
+  <circle cx="36" cy="41" r="1.8" fill="#D97706" />
+
+  <!-- Center Core -->
+  <circle cx="50" cy="50" r="7" fill="url(#centerGlow)" />
+  <circle cx="50" cy="50" r="3.2" fill="#C2410C" />
+</svg>

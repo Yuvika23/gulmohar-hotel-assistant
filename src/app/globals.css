@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Architectural Indian Boutique Palette */
+    --hotel-bg: #C4AD98;
+    --hotel-surface: #FFFFFF;
+    --hotel-surface-warm: #FAF7F0;
+    --hotel-surface-muted: #BFA893;
+    --hotel-surface-dark: #191614;
+    
+    /* Typography */
+    --hotel-text: #1C1917;
+    --hotel-text-secondary: #44403C;
+    --hotel-text-muted: #78716C;
+    
+    /* Warm Sandstone Borders */
+    --hotel-border: #B59E89;
+    --hotel-border-subtle: #C2AB96;
+    --hotel-border-strong: #9E8773;
+    
+    /* Gulmohar Terracotta & Warm Ochre Accents */
+    --hotel-primary: #C2410C;
+    --hotel-primary-hover: #9A3412;
+    --hotel-primary-light: #FFF7ED;
+    --hotel-primary-border: #FED7AA;
+    
+    --hotel-ochre: #B45309;
+    --hotel-ochre-light: #FEF3C7;
+    
+    /* Hospitality Status Green */
+    --hotel-status-green: #15803D;
+    --hotel-status-green-bg: #F0FDF4;
+    --hotel-status-green-border: #BBF7D0;
+  }
+
+  body {
+    background-color: var(--hotel-bg);
+    color: var(--hotel-text);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Layered Hotel Card Elevation */
+.hotel-card {
+  background: var(--hotel-surface);
+  border: 1px solid var(--hotel-border);
+  box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.05), 0 1px 3px 0 rgba(28, 25, 23, 0.03);
+}
+
+.hotel-card-warm {
+  background: var(--hotel-surface-warm);
+  border: 1px solid var(--hotel-border);
+  box-shadow: 0 2px 10px -2px rgba(28, 25, 23, 0.04);
+}
+
+/* Clean Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #ECE5DA;
+}
+::-webkit-scrollbar-thumb {
+  background: #C7BEB0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A39989;
+}
+
+/* Smooth Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
