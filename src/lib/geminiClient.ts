@@ -10,7 +10,7 @@ import { buildSystemPrompt } from "@/lib/systemPrompt";
  * conversational grounded-knowledge tasks.
  */
 
-const MODEL_NAME = "gemini-2.5-flash";
+const MODEL_NAME = "gemini-3.6-flash";
 
 let _client: GoogleGenAI | null = null;
 

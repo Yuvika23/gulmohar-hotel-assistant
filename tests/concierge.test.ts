@@ -34,7 +34,7 @@ vi.mock("../src/lib/geminiClient", () => ({
     }
     return "Thank you for your inquiry. I'd be happy to help with any questions about The Gulmohar.";
   }),
-  MODEL_NAME: "gemini-2.5-flash",
+  MODEL_NAME: "gemini-3.6-flash",
 }));
 
 describe("The Gulmohar — LLM-Powered Concierge Engine Tests", () => {
